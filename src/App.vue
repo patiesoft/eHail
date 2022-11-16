@@ -1,28 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { authStateChanged } from "./firebase/auth.js";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  name: "App",
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data: () => ({
+    //
+  }),
+  mounted() {
+    console.log("hey");
+    authStateChanged();
+    console.log("hey");
+  },
+  beforeDestroy() {
+    console.log("In BeforeDestroy");
+    this.getOnAuthStateChangedUnsubscribe();
+    this.getUserDocumentSnapshotUnsubscribe();
+    this.getPassengerRideUnsubscribe();
+    console.log("Leaving BeforeDestroy");
+  },
+};
+</script>
