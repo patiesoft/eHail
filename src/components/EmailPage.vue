@@ -19,18 +19,16 @@
         <h4 class="text-center mb-9">Welcome</h4>
       </v-row>
       <v-row justify="center" align="center">
-        <v-col cols="12">
-          <v-text-field
-            label="email"
-            outlined
-            rounded
-            class="px-3"
-            append-icon="mdi-arrow-right"
-            @click:append="checkEmail"
-            :rules="rules"
-            v-model="email"
-          ></v-text-field>
-        </v-col>
+        <v-text-field
+          label="email"
+          outlined
+          rounded
+          class="px-3 input-max-width mx-3"
+          append-icon="mdi-arrow-right"
+          @click:append="checkEmail"
+          :rules="rules"
+          v-model="email"
+        ></v-text-field>
       </v-row>
     </v-col>
   </v-row>
@@ -74,5 +72,8 @@ export default {
 }
 .gradient-background-color {
   background: linear-gradient(0.25turn, #f3e5f5, white);
+}
+.input-max-width {
+  max-width: 600px;
 }
 </style>

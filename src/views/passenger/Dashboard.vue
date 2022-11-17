@@ -13,23 +13,12 @@
       </v-flex>
 
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-img src="../../assets/taxi.svg" max-height="30" max-width="30">
-        </v-img>
-      </v-btn>
-
-      <v-btn icon>
-        <notification-bell
-          :size="30"
-          :count="0"
-          :upperLimit="50"
-          counterStyle="roundRectangle"
-          counterBackgroundColor="#FF0000"
-          counterTextColor="#FFFFFF"
-          iconColor="#FFFFFF"
-          class="mx-7"
-        />
-      </v-btn>
+      <v-chip
+        elevation="1"
+        class="text-h6 font-weight-regular text-center grey lighte-1"
+        >Passenger</v-chip
+      >
+      <v-spacer></v-spacer>
 
       <v-menu bottom left offset-y>
         <template v-slot:activator="{ on, attrs }">
@@ -46,7 +35,6 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-spacer />
     </v-app-bar>
     <v-layout column>
       <v-container fluid>
@@ -68,11 +56,11 @@
       </v-container>
     </v-layout>
     <router-view></router-view>
+    <v-footer absolute></v-footer>
   </v-container>
 </template>
 
 <script>
-import NotificationBell from "vue-notification-bell";
 import { logout } from "../../firebase";
 import axios from "axios";
 export default {
@@ -100,9 +88,7 @@ export default {
       lng: 0,
       },*/
   }),
-  components: {
-    NotificationBell,
-  },
+  components: {},
   created() {
     this.$getLocation({}).then((coordinates) => {
       //this.myCoordinates = coordinates;
@@ -117,7 +103,6 @@ export default {
       };
       console.log({ coordinates });
       this.$store.dispatch("setDestination", coordinates);
-      console.log("Hey");
       const config = {
         method: "get",
         url: `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates.lat},${coordinates.lng}&key=AIzaSyB1oFD8l6nVod4FU4XuFxxlbDw2uxhTUf0`,
@@ -132,15 +117,11 @@ export default {
       });
     },
     signout() {
-      console.log("logout");
       logout()
         .then(() => {
           this.$router.push("/");
         })
         .catch((error) => console.log(error));
-    },
-    searchDestination() {
-      console.log("Search destination");
     },
   },
   computed: {

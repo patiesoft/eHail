@@ -18,19 +18,17 @@
         <h4 class="text-center mb-9">Signing In...</h4>
       </v-row>
       <v-row justify="center" align="center">
-        <v-col cols="12">
-          <v-text-field
-            label="password"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            outlined
-            rounded
-            class="px-3"
-            @click:append="showPassword = !showPassword"
-            :rules="rules"
-            v-model="password"
-            :type="showPassword ? 'text' : 'password'"
-          ></v-text-field>
-        </v-col>
+        <v-text-field
+          label="password"
+          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+          outlined
+          rounded
+          class="px-3 input-max-width mx-3"
+          @click:append="showPassword = !showPassword"
+          :rules="rules"
+          v-model="password"
+          :type="showPassword ? 'text' : 'password'"
+        ></v-text-field>
         <v-col cols="12" class="d-flex justify-center"
           ><v-btn rounded @click="signin" color="success" large
             >SignIn</v-btn

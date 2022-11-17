@@ -1,7 +1,9 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="app-width">
     <v-app-bar app color="grey lighten-2" elevate-on-scroll height="70px">
-      <v-icon v-show="$router.currentRouter.path !== '/taxi'">mdi-arrow-left</v-con>
+      <v-icon v-show="$router.currentRoute.path !== '/taxi'"
+        >mdi-arrow-left</v-icon
+      >
       <v-flex>
         <v-toolbar-title class="text-h5 ml-2 font-weight-bold"
           >e'Hail</v-toolbar-title
@@ -9,23 +11,10 @@
       </v-flex>
 
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-img src="../../assets/taxi.svg" max-height="30" max-width="30">
-        </v-img>
-      </v-btn>
-
-      <v-btn icon>
-        <notification-bell
-          :size="30"
-          :count="0"
-          :upperLimit="50"
-          counterStyle="roundRectangle"
-          counterBackgroundColor="#FF0000"
-          counterTextColor="#FFFFFF"
-          iconColor="#FFFFFF"
-          class="mx-7"
-        />
-      </v-btn>
+      <v-chip elevation="1" class="text-h6 font-weight-regular gry lighten-1"
+        >Taxi</v-chip
+      >
+      <v-spacer></v-spacer>
 
       <v-menu bottom left offset-y>
         <template v-slot:activator="{ on, attrs }">
@@ -42,7 +31,6 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-spacer />
     </v-app-bar>
     <v-layout column>
       <v-container fluid>
@@ -62,7 +50,7 @@
         </v-row>
       </v-container>
     </v-layout>
-    <v-layout column>
+    <!--<v-layout column>
       <h2 class="text-center">Booking</h2>
       <h2 class="text-center text-display font-weight-regular">
         origin: ${{}}
@@ -74,7 +62,7 @@
       <h2 class="text-center text-display font-weight-regular">
         surname: ${{}}
       </h2>
-    </v-layout>
+    </v-layout>-->
     <v-layout column>
       <v-divider />
       <h2 class="text-center">Available Passengers</h2>
@@ -151,7 +139,9 @@ export default {
       return bidded;
     },
     bid(payload) {
-      return bidRide(payload);
+      return bidRide(payload).then(() => {
+        getRides();
+      });
     },
     getAddress(coordinates) {
       console.log(coordinates);
